@@ -1,0 +1,64 @@
+.wrapper_login {
+    background-color: #ffffff; /* Color del fondo del formulario */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    position: absolute;
+    margin-top: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.img_login {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+.h1_login {
+    color: #16960a; /* Color del título */
+    margin-bottom: 40px;
+}
+
+.input_group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input_group label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    pointer-events: none;
+    color: #868e96; 
+    transition: 0.2s ease all;
+}
+
+.input_group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input_group input:focus + label,
+.input_group input:not(:placeholder-shown) + label {
+    top: -15px;
+    font-size: 15px;
+    color: #17a407; 
+}
+
+#label_login {
+    color: #16960a;
+}
+
+.eye-icon {
+    display: flex;
+    margin-top: -11%;
+    margin-left: 90%;
+    cursor: pointer;
+}

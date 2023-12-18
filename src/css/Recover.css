@@ -1,0 +1,56 @@
+
+
+.wrapper_recover {
+    background-color: #ffffff; /* Color del fondo del formulario */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    position: absolute;
+    margin-top: 40px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-size-adjust: 100%;
+}
+
+.img_recover {
+    width: 100px;
+    margin-bottom: 15px;
+}
+
+.h1_recover {
+    color: rgb(41, 71, 237); 
+    margin-bottom: 40px;
+}
+
+.input_group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.input_group label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    pointer-events: none;
+    color: #868e96; 
+    transition: 0.2s ease all;
+}
+
+.input_group input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input_group input:focus + label,
+.input_group input:not(:placeholder-shown) + label {
+    top: -15px;
+    font-size: 15px;
+    color: rgb(41, 71, 237); 
+}

@@ -1,0 +1,58 @@
+/* Navbar.css */
+
+.img_navbar {
+    width: 50px;
+    margin-left: 20px;
+}
+
+.img_Info {
+  width: 60px;
+  margin-left: 20px;
+}
+
+header {
+  background-color: #040404;
+  padding: 3px; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.username {
+  margin-right: 30px;
+  color: #ffffff;
+}
+
+.welcome_navbar {
+  color: #ffffff; 
+  margin-right: 20px;
+}
+
+.nav {
+  display: flex;
+}
+
+.button_logout_navbar {
+    margin-right: 20px;
+}
+
+#button_modal {
+  background-color: rgb(255, 0, 0);
+  border: none;
+  transition: 0.2s; 
+}
+
+#button_modal:hover {
+  background-color: rgb(139, 18, 18);
+}
+
+
+.container_button_nav {
+  display: flex;
+  gap: 10px; /* Espacio entre los botones, puedes ajustarlo según tus preferencias */
+}

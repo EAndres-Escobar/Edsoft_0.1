@@ -1,0 +1,17 @@
+
+.carousel-item img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    border-radius: 10px;
+    margin-bottom: 125px;
+    margin-top: 20px;
+    z-index: 1;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  }
+  
+  .carousel_control {
+    width: 5%; /
+  }
+  

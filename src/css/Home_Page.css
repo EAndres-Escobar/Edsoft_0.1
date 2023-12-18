@@ -1,0 +1,14 @@
+
+  .Motivation {
+      width: 50rem;
+      display: flex;
+      position: absolute;
+      align-items: center;
+      justify-content: center; 
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%); /* La imagen se queda centrada en ambos ejes */
+      z-index: 99999; /* Valor de z-index */
+      filter: drop-shadow(10px 5px 5px #000000); /* Sombra de la imagen */
+  }
+  

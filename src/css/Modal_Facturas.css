@@ -1,0 +1,57 @@
+.mb-3_idVendedor,
+.mb-3_idCliente,
+.mb-3_codigoProducto {
+    margin-left: 30px;
+    width: 150px;
+    float: left;
+}
+
+.buscador_factura {
+    display: flex;
+    justify-content: right;
+    margin-top: -30px;
+    cursor: pointer;
+}
+
+.mb-3_formGroup {
+    width: 500px;
+    margin-right: 30px;
+}
+
+.mb-3_laboratorio {
+    margin-left: 30px;
+    width: 165px;
+    float: left;
+    margin-right: 15px;
+}
+
+.mb-3_values {
+    width: 150px;
+}
+
+.mb-3_values_total {
+    width: 150px; 
+    margin-right: 30px;
+}
+
+.table_facturar {
+    font-size: 12px;
+    text-align: center;
+}
+
+.table_facturar tbody {
+    display: block;
+    height: 80px; 
+    overflow-y: auto;
+  }
+  
+  .table_facturar thead,
+  .table_facturar tbody tr {
+    display: table;
+    width: 98%;
+    table-layout: fixed; 
+  }
+  
+  .table_facturar thead {
+    width: calc(100% - 1.3em);
+  }

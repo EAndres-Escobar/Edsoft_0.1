@@ -1,0 +1,42 @@
+.table_inventario_container {
+    width: 100%;
+    height: 150px;
+    overflow-y: auto;
+    position: relative;
+  }
+  
+  .table_inventario {
+    font-size: 12px;
+    text-align: center;
+    width: 100%;
+    table-layout: fixed;
+    position: relative;
+    border-collapse: collapse;
+  }
+  
+  .table_inventario thead {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 10;
+  }
+  
+  .table_inventario thead th {
+    position: relative;
+  }
+
+ /* ModalInventario.css */
+
+ .modal-container {
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+    margin: 0 0; 
+  }
+  
+  /* Ajustar según sea necesario */
+  .modal-container .mb-3 {
+    margin-bottom: 1rem;
+    width: calc(40% - 30px); /* 50% menos el margen izquierdo y derecho de 30px */
+  }
+  

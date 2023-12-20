@@ -7,6 +7,7 @@ import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { FaTrash } from "react-icons/fa"; // Importar FontAwesome icon
 import "../css/Modal_Proveedores.css";
 
 const MySwal = withReactContent(Swal);
@@ -125,8 +126,26 @@ const ModalProveedores = ({ show, handleClose }) => {
     });
   };
 
+  const handleEliminarProveedor = (index) => {
+    const proveedorId = proveedoresEncontrados[index][0];
+    const proveedorNombre = proveedoresEncontrados[index][1];
+    const nuevosProveedores = [...proveedoresEncontrados];
+    nuevosProveedores.splice(index, 1);
+    setProveedoresEncontrados(nuevosProveedores);
+
+    axios
+      .delete(`${localhost}/proveedores/${proveedorId}`)
+      .then(() => {
+        mostrarMensajeExito(`Proveedor eliminado ${proveedorNombre} con éxito`);
+      })
+      .catch((err) => {
+        console.error(err);
+        mostrarMensajeError("Error al eliminar el proveedor");
+      });
+  };
+
   return (
-    <Modal show={show} onHide={handleClose} backdrop="static" size="lg">
+    <Modal show={show} onHide={handleClose} backdrop="static" size="xl">
       <Modal.Header closeButton onClick={handleClose}>
         <Modal.Title>Proveedores</Modal.Title>
       </Modal.Header>
@@ -154,8 +173,6 @@ const ModalProveedores = ({ show, handleClose }) => {
                 onChange={handleChange}
               />
             </Form.Group>
-          </div>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
               <Form.Label>Documento ID</Form.Label>
               <Form.Control
@@ -166,6 +183,8 @@ const ModalProveedores = ({ show, handleClose }) => {
                 onChange={handleChange}
               />
             </Form.Group>
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
               <Form.Label>Correo Electrónico</Form.Label>
               <Form.Control
@@ -177,8 +196,7 @@ const ModalProveedores = ({ show, handleClose }) => {
                 onChange={handleChange}
               />
             </Form.Group>
-          </div>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
               <Form.Label>Celular</Form.Label>
               <Form.Control
@@ -212,6 +230,7 @@ const ModalProveedores = ({ show, handleClose }) => {
               <th>Documento</th>
               <th>Email</th>
               <th>Celular</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -227,6 +246,14 @@ const ModalProveedores = ({ show, handleClose }) => {
                     .map((proveedoresItem, subIndex) => (
                       <td key={subIndex}>{proveedoresItem}</td>
                     ))}
+                  <td>
+                    <Button
+                      variant="outline-danger"
+                      onClick={() => handleEliminarProveedor(index)}
+                    >
+                      <FaTrash />
+                    </Button>
+                  </td>
                 </tr>
               ))}
           </tbody>

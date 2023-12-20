@@ -127,6 +127,30 @@ def buscar_clientes():
 
     return jsonify({'clientes': clientes}), 200
 
+# eliminar clientes de la base de datos 
+@app.route('/clientes/<int:cliente_id>', methods=['DELETE'])
+def eliminar_cliente(cliente_id):
+    # Conectar a la base de datos MySQL y buscar el cliente por ID
+    cursor = mysql.connection.cursor()
+
+    cursor.execute(
+        'SELECT * FROM clientes WHERE id_clientes = %s', (cliente_id,))
+    cliente = cursor.fetchone()
+
+    if not cliente:
+        cursor.close()
+        app.logger.error(f'Cliente con ID {cliente_id} no encontrado')
+        return jsonify({'message': f'Cliente con ID {cliente_id} no encontrado'}), 404
+
+    # Eliminar el cliente de la base de datos
+    cursor.execute(
+        'DELETE FROM clientes WHERE id_clientes = %s', (cliente_id,))
+    mysql.connection.commit()
+    cursor.close()
+
+    app.logger.info(f'Cliente con ID {cliente_id} eliminado correctamente')
+    return jsonify({'message': f'Cliente con ID {cliente_id} eliminado correctamente'}), 200
+
 
 # Ruta para agregar un nuevo proveedor
 @app.route('/proveedores', methods=['POST'])
@@ -185,6 +209,19 @@ def buscar_proveedores():
 
     return jsonify({'proveedores': proveedores}), 200
 
+# Ruta para eliminar proveedor por ID
+@app.route('/proveedores/<int:proveedor_id>', methods=['DELETE'])
+def eliminar_proveedor(proveedor_id):
+    # Conectar a la base de datos MySQL y eliminar el proveedor
+    cursor = mysql.connection.cursor()
+
+    cursor.execute('DELETE FROM proveedores WHERE id_proveedores = %s', (proveedor_id,))
+
+    mysql.connection.commit()
+    cursor.close()
+
+    app.logger.info(f'Proveedor con ID {proveedor_id} eliminado correctamente')
+    return jsonify({'message': f'Proveedor con ID {proveedor_id} eliminado correctamente'}), 200
 
 # Buscar los empleados registrados en la base de datos
 @app.route('/empleados/buscar', methods=['GET'])

@@ -7,6 +7,7 @@ import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { FaTrash } from "react-icons/fa"; // Importar FontAwesome icon
 import "../css/Modal_Clientes.css";
 
 const MySwal = withReactContent(Swal);
@@ -58,14 +59,12 @@ const ModalCliente = ({ show, handleClose }) => {
       return;
     }
 
-    // Verificar si el cliente ya existe
     axios
       .get(`${localhost}/clientes/buscar?documentoid=${cliente.documentoid}`)
       .then((res) => {
         if (res.data.clientes.length > 0) {
           mostrarMensajeError("El cliente ya existe en la base de datos");
         } else {
-          // El cliente no existe, proceder con la solicitud POST
           axios
             .post(`${localhost}/clientes`, cliente)
             .then((res) => {
@@ -138,8 +137,29 @@ const ModalCliente = ({ show, handleClose }) => {
     });
   };
 
+  const handleEliminarCliente = (index) => {
+    const clienteArray = clientesEncontrados[index];
+    const nombres = clienteArray[1];
+  
+    const nuevosClientes = [...clientesEncontrados];
+    nuevosClientes.splice(index, 1);
+    setClientesEncontrados(nuevosClientes);
+  
+    // Aquí enviar la solicitud para eliminar el cliente en el servidor
+    const clienteId = clienteArray[0];
+    axios
+      .delete(`${localhost}/clientes/${clienteId}`)
+      .then(() => {
+        mostrarMensajeExito(`Cliente eliminado ${nombres} con éxito`);
+      })
+      .catch((err) => {
+        console.error(err);
+        mostrarMensajeError("Error al eliminar el cliente");
+      });
+  };
+
   return (
-    <Modal show={show} onHide={handleClose} backdrop="static" size="lg">
+    <Modal show={show} onHide={handleClose} backdrop="static" size="xl">
       <Modal.Header closeButton onClick={handleClose}>
         <Modal.Title>Cliente</Modal.Title>
       </Modal.Header>
@@ -167,8 +187,8 @@ const ModalCliente = ({ show, handleClose }) => {
                 onChange={handleChange}
               />
             </Form.Group>
-          </div>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          
+        
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
               <Form.Label>Documento ID</Form.Label>
               <Form.Control
@@ -179,6 +199,8 @@ const ModalCliente = ({ show, handleClose }) => {
                 onChange={handleChange}
               />
             </Form.Group>
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
               <Form.Label>Correo Electrónico</Form.Label>
               <Form.Control
@@ -190,8 +212,6 @@ const ModalCliente = ({ show, handleClose }) => {
                 onChange={handleChange}
               />
             </Form.Group>
-          </div>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput5">
               <Form.Label>Celular</Form.Label>
               <Form.Control
@@ -214,32 +234,41 @@ const ModalCliente = ({ show, handleClose }) => {
             </Form.Group>
           </div>
         </Form>
-
-        {/* Tabla para mostrar los clientes encontrados */}
-        <Table striped bordered hover className="table_clientes">
-          <thead className="thead_clientes">
-            <tr>
-              <th className="columna-nid">N_Id</th>
-              <th>Nombres</th>
-              <th>Apellidos</th>
-              <th>Documento</th>
-              <th>Email</th>
-              <th>Celular</th>
-            </tr>
-          </thead>
-          <tbody>
-            {clientesEncontrados &&
-              clientesEncontrados.length > 0 &&
-              clientesEncontrados.map((clienteArray, index) => (
-                <tr key={index}>
-                  <td className="columna-nid">{clienteArray[0]}</td>
-                  {clienteArray.slice(1).map((clienteItem, subIndex) => (
-                    <td key={subIndex}>{clienteItem}</td>
-                  ))}
-                </tr>
-              ))}
-          </tbody>
-        </Table>
+        <div className="table_clientes_container">
+          <Table striped bordered hover className="table_clientes">
+            <thead className="thead_clientes">
+              <tr>
+                <th className="columna-nid">N_Id</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Documento</th>
+                <th>Email</th>
+                <th>Celular</th>
+                <th>Eliminar Cliente</th>
+              </tr>
+            </thead>
+            <tbody>
+              {clientesEncontrados &&
+                clientesEncontrados.length > 0 &&
+                clientesEncontrados.map((clienteArray, index) => (
+                  <tr key={index}>
+                    <td className="columna-nid">{clienteArray[0]}</td>
+                    {clienteArray.slice(1).map((clienteItem, subIndex) => (
+                      <td key={subIndex}>{clienteItem}</td>
+                    ))}
+                    <td>
+                      <Button
+                        variant="outline-danger"
+                        onClick={() => handleEliminarCliente(index)}
+                      >
+                        <FaTrash />
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </Table>
+        </div>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="outline-warning" onClick={handleBorrar}>

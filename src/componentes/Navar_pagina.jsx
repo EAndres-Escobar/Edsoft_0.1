@@ -71,7 +71,7 @@ function NavScrollPrincipal() {
       case "facturas":
         handleShowFacturas();
         break;
-      // Agrega más casos según las opciones de búsqueda
+
       default:
         break;
     }
@@ -81,7 +81,7 @@ function NavScrollPrincipal() {
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container fluid>
-          <Navbar.Brand href="#">Barra de Navegación</Navbar.Brand>
+          <Navbar.Brand>Navegar</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
